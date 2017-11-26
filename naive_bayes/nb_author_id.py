@@ -32,8 +32,15 @@ features_train, features_test, labels_train, labels_test = preprocess()
 #########################################################
 ### your code goes here ###
 clf = GaussianNB() # GaussianNB classifier
+t0 = time()
 clf.fit(features_train, labels_train)
+print "Training time: %f s\n" % round(time() - t0, 3)
+
+# test the running time
+t1 = time()
 prediction = clf.predict(features_test) # get the predition label
+print "Prediction time: %f s" % round(time() - t1, 3)
+print "The prediction accuracy score:\n"
 print accuracy_score(prediction, labels_test)
 
 #########################################################
