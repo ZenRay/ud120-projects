@@ -23,45 +23,65 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 # takes long time to run the svm
 # reduce the number of dataset to run more quickly
-# features_train = features_train[:len(features_train)/100]
-# labels_train = labels_train[:len(labels_train)/100]
+reduce_choose = raw_input("Reduce 0.99 dataset(Y or N?): ")
+if reduce_choose in ["Y", "y"]:
+	features_train = features_train[:len(features_train)/100]
+	labels_train = labels_train[:len(labels_train)/100]
 
 #########################################################
 ### your code goes here ###
+# Choose the kernel function and the C value
 kernel = raw_input("Enter the kernel function: ")
+C_value = float(raw_input("Enter the C value: "))
 
-# linear kernel
-if kernel == "linear":
-	clf = SVC(kernel="linear")
-	# train the dataset and running time
-	t0 = time()
-	clf.fit(features_train, labels_train)
-	print "Training time %f s\n" % round(time() - t0, 3)
-	# predict the test dataset and running time
-	t1 = time()
-	prediction = clf.predict(features_test)
-	print "Prediction time %f s\n" % round(time() - t1, 3)
-	# get the prediction accuracy
-	print("Prediciton accuracy score:\n")
-	print accuracy_score(prediction, labels_test)
+clf = SVC(kernel=kernel, C=C_value)
+t0 = time()
+clf.fit(features_train, labels_train)
+print "Training time %f s\n" % round(time() - t0, 3)
+# predict the test dataset and running time
+t1 = time()
+prediction = clf.predict(features_test)
+print "Prediction time %f s\n" % round(time() - t1, 3)
+# get the prediction accuracy
+print("Prediciton accuracy score:\n")
+print accuracy_score(prediction, labels_test)
 
-# rbf kernel
-elif kernel == "rbf":
-	C_value = [10.0, 100.0, 1000.0, 10000.0]
-	for i in C_value:
-		print "The kernel is rbf. The C value is %f." % i
-		clf = SVC(kernel="rbf", C=i)
-		# train the dataset and running time
-		t0 = time()
-		clf.fit(features_train, labels_train)
-		print "Training time %f s\n" % round(time() - t0, 3)
-		# predict the test dataset and running time
-		t1 = time()
-		prediction = clf.predict(features_test)
-		print "Prediction time %f s\n" % round(time() - t1, 3)
-		# get the prediction accuracy
-		print("Prediciton accuracy score:\n")
-		print accuracy_score(prediction, labels_test)
+# show prediction
+for i in [9, 25, 49]:
+	print "The element %d is classified in %s" % (i, prediction[i])
+
+# # linear kernel
+# if kernel == "linear":
+# 	clf = SVC(kernel="linear")
+# 	# train the dataset and running time
+# 	t0 = time()
+# 	clf.fit(features_train, labels_train)
+# 	print "Training time %f s\n" % round(time() - t0, 3)
+# 	# predict the test dataset and running time
+# 	t1 = time()
+# 	prediction = clf.predict(features_test)
+# 	print "Prediction time %f s\n" % round(time() - t1, 3)
+# 	# get the prediction accuracy
+# 	print("Prediciton accuracy score:\n")
+# 	print accuracy_score(prediction, labels_test)
+
+# # rbf kernel
+# elif kernel == "rbf":
+# 	C_value = [10.0, 100.0, 1000.0, 10000.0]
+# 	for i in C_value:
+# 		print "The kernel is rbf. The C value is %f." % i
+# 		clf = SVC(kernel="rbf", C=i)
+# 		# train the dataset and running time
+# 		t0 = time()
+# 		clf.fit(features_train, labels_train)
+# 		print "Training time %f s\n" % round(time() - t0, 3)
+# 		# predict the test dataset and running time
+# 		t1 = time()
+# 		prediction = clf.predict(features_test)
+# 		print "Prediction time %f s\n" % round(time() - t1, 3)
+# 		# get the prediction accuracy
+# 		print("Prediciton accuracy score:\n")
+# 		print accuracy_score(prediction, labels_test)
 
 
 #########################################################
