@@ -47,18 +47,21 @@ if kernel == "linear":
 
 # rbf kernel
 elif kernel == "rbf":
-	clf = SVC(kernel="rbf")
-	# train the dataset and running time
-	t0 = time()
-	clf.fit(features_train, labels_train)
-	print "Training time %f s\n" % round(time() - t0, 3)
-	# predict the test dataset and running time
-	t1 = time()
-	prediction = clf.predict(features_test)
-	print "Prediction time %f s\n" % round(time() - t1, 3)
-	# get the prediction accuracy
-	print("Prediciton accuracy score:\n")
-	print accuracy_score(prediction, labels_test)
+	C_value = [10.0, 100.0, 1000.0, 10000.0]
+	for i in C_value:
+		print "The kernel is rbf. The C value is %f." % i
+		clf = SVC(kernel="rbf", C=i)
+		# train the dataset and running time
+		t0 = time()
+		clf.fit(features_train, labels_train)
+		print "Training time %f s\n" % round(time() - t0, 3)
+		# predict the test dataset and running time
+		t1 = time()
+		prediction = clf.predict(features_test)
+		print "Prediction time %f s\n" % round(time() - t1, 3)
+		# get the prediction accuracy
+		print("Prediciton accuracy score:\n")
+		print accuracy_score(prediction, labels_test)
 
 
 #########################################################
