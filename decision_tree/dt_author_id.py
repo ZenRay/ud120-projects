@@ -33,6 +33,8 @@ prediction = clf.predict(features_test)
 
 accuracy = accuracy_score(prediction, labels_test)
 print "The prediction accuracy score is %f ." % accuracy
+
+print len(features_train[0])
 #########################################################
 
 

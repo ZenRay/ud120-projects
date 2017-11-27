@@ -1,8 +1,15 @@
 #!/usr/bin/python
 
+import sys
 import matplotlib.pyplot as plt
 from prep_terrain_data import makeTerrainData
 from class_vis import prettyPicture
+from sklearn.metrics import accuracy_score
+# import the algorithm
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+
 
 features_train, labels_train, features_test, labels_test = makeTerrainData()
 
@@ -17,28 +24,40 @@ bumpy_slow = [features_train[ii][1] for ii in range(0, len(features_train)) if l
 
 
 #### initial visualization
-plt.xlim(0.0, 1.0)
-plt.ylim(0.0, 1.0)
-plt.scatter(bumpy_fast, grade_fast, color = "b", label="fast")
-plt.scatter(grade_slow, bumpy_slow, color = "r", label="slow")
-plt.legend()
-plt.xlabel("bumpiness")
-plt.ylabel("grade")
-plt.show()
+# plt.xlim(0.0, 1.0)
+# plt.ylim(0.0, 1.0)
+# plt.scatter(bumpy_fast, grade_fast, color = "b", label="fast")
+# plt.scatter(grade_slow, bumpy_slow, color = "r", label="slow")
+# plt.legend()
+# plt.xlabel("bumpiness")
+# plt.ylabel("grade")
+# plt.show()
 ################################################################################
 
 
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
+classifier_method = raw_input("Enter the method of classifier(KNN, RF or AB): ")
 
+if classifier_method in ["KNN", "knn"]:
+	clf = KNeighborsClassifier(weights="distance")
+elif classifier_method in ["RF", "rf"]:
+	clf = RandomForestClassifier(min_samples_split=6, n_estimators=120)
+elif classifier_method in ["AB", "ab"]:
+	clf = AdaBoostClassifier(learning_rate=0.5, algorithm="SAMME", random_state=1000000)
+else:
+	print "Wrong classifier method. Restart!"
+	sys.exit(0) # exit the program
 
+clf.fit(features_train, labels_train)
 
+prediction = clf.predict(features_test)
 
+accuracy = accuracy_score(prediction, labels_test)
 
+print "The %s classifier accuracy score is %f ." % (classifier_method, accuracy)
 
-
-
-try:
-    prettyPicture(clf, features_test, labels_test)
-except NameError:
-    pass
+# try:
+#     prettyPicture(clf, features_test, labels_test)
+# except NameError:
+#     pass
