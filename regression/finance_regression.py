@@ -45,10 +45,16 @@ test_color = "r"
 reg = LinearRegression()
 reg.fit(feature_train, target_train)
 
+# get the slope and intercepte
+print "The regression slope is: %f ." % reg.coef_[0]
 
+print "The regression intercepte is:  %f." % reg.intercept_
 
-
-
+# get the regression score
+print "The regression score in the train dataset is: %f." % \
+    reg.score(feature_train, target_train)
+print "The regression score in the test dataset is: %f." % \
+    reg.score(feature_test, target_test)
 
 
 ### draw the scatterplot, with color-coded training and testing points
