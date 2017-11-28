@@ -69,6 +69,11 @@ if len(cleaned_data) > 0:
     ### refit your cleaned data!
     try:
         reg.fit(ages, net_worths)
+        # get the slope
+        # print len(ages)
+        print "After remove outlier"
+        print "The slope of the regression %f ." % reg.coef_[0]
+        print "The score of the regression %f." % reg.score(ages_test, net_worths_test)
         plt.plot(ages, reg.predict(ages), color="blue")
     except NameError:
         print "you don't seem to have regression imported/created,"
@@ -77,6 +82,7 @@ if len(cleaned_data) > 0:
     plt.scatter(ages, net_worths)
     plt.xlabel("ages")
     plt.ylabel("net worths")
+    # plt.ylim(0, 450)
     plt.show()
 
 
