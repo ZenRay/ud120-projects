@@ -34,8 +34,8 @@ reg.fit(ages_train, net_worths_train)
 # get the slope 
 print "The slope of the regression %f ." % reg.coef_[0]
 
-
-
+# get the regression score
+print "The score of the regression %f." % reg.score(ages_test, net_worths_test)
 
 try:
     plt.plot(ages, reg.predict(ages), color="blue")
