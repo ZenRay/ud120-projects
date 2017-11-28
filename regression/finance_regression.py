@@ -24,7 +24,7 @@ dictionary = pickle.load( open("../final_project/final_project_dataset_modified.
 
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
-features_list = ["bonus", "long_term_incentive"] #, "salary"]
+features_list = ["bonus", "salary"]
 # avoid the dict keys sequence after py3.3
 sort_keys = "../tools/python2_lesson06_keys.pkl"
 data = featureFormat( dictionary, features_list, remove_any_zeroes=True)
@@ -73,10 +73,19 @@ plt.scatter(feature_test[0], target_test[0], color=train_color, label="train")
 
 ### draw the regression line, once it's coded
 try:
-    plt.plot( feature_test, reg.predict(feature_test) )
+    plt.plot( feature_test, reg.predict(feature_test), color="r" )
 except NameError:
     pass
+# add a line about train dataset
+reg.fit(feature_test, target_test)
+plt.plot(feature_train, reg.predict(feature_train), color="b")
+
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
 plt.show()
+
+# print slope about the train feature and its predict 
+train_prediction = reg.predict(feature_train)
+reg.fit(feature_train, train_prediction)
+print "The slope about the train and its predition is %f ." % reg.coef_[0]
