@@ -24,7 +24,7 @@ dictionary = pickle.load( open("../final_project/final_project_dataset_modified.
 
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
-features_list = ["bonus", "salary"]
+features_list = ["bonus", "long_term_incentive"] #, "salary"]
 # avoid the dict keys sequence after py3.3
 sort_keys = "../tools/python2_lesson06_keys.pkl"
 data = featureFormat( dictionary, features_list, remove_any_zeroes=True)
