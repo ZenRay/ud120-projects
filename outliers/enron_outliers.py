@@ -12,6 +12,8 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 features = ["salary", "bonus"]
 #remove outlier
 data_dict.pop("TOTAL", 0)
+data_dict.pop("LAY KENNETH L", 0)
+data_dict.pop("SKILLING JEFFREY K", 0)
 data = featureFormat(data_dict, features)
 
 
