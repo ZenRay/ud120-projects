@@ -44,7 +44,7 @@ labels_train   = labels_train[:150]
 regresssion = DecisionTreeClassifier()
 regresssion.fit(features_train, labels_train)
 
-prediction = regresssion.predict(features_train)
+prediction = regresssion.predict(features_test)
 
 print "The number of training points is %d ." % len(prediction)
-print "The accuracy score is %f ." % accuracy_score(labels_train, prediction)
+print "The accuracy score is %f ." % accuracy_score(labels_test, prediction)
