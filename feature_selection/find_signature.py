@@ -3,7 +3,10 @@
 import pickle
 import numpy
 numpy.random.seed(42)
-
+# import lasso regresssion decisiontree and accuracy score
+from sklearn.linear_model import Lasso
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
 
 ### The words (features) and authors (labels), already largely processed.
 ### These files should have been created from the previous (Lesson 10)
@@ -38,6 +41,10 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
+regresssion = DecisionTreeClassifier()
+regresssion.fit(features_train, labels_train)
 
+prediction = regresssion.predict(features_train)
 
-
+print "The number of training points is %d ." % len(prediction)
+print "The accuracy score is %f ." % accuracy_score(labels_train, prediction)
