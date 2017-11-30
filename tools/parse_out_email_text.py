@@ -35,7 +35,7 @@ def parseOutText(f):
         ### space between each stemmed word)
         stemmer = SnowballStemmer("english")
         tem_words = []
-        for word in text_string.split(" "):
+        for word in text_string.split():
             # check the word whether it's space
             if word != "":
                 tem_words.append(stemmer.stem(word))
