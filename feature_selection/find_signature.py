@@ -60,4 +60,5 @@ for i in regresssion.feature_importances_:
     feature_index += 1
 
 # print the most importance feature by using get_feature_naems
-print vectorizer.get_feature_names()[33614]
+print "The importance feature is %s .It's index is %d ." % \
+	(vectorizer.get_feature_names()[feature_index], feature_index)
